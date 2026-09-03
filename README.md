@@ -69,11 +69,9 @@ Descrição: Cadastra um novo usuário caso os campos obrigatórios sejam fornec
 Status Code Esperado: 201 Created
 
 Corpo da Requisição (JSON - Exemplo)
-```
-{   
+```bash
     "nome": "Fábio Oliveira",
     "email": "fabio@email.com"
-}
 ```
 
 ### 2. Falha no Cadastro (Validação)
@@ -83,11 +81,9 @@ Corpo da Requisição (JSON - Exemplo)
 * **Descrição:** Retorna um erro caso o payload enviado não contenha o campo obrigatório `email`.
 * **Status Code Esperado:** `400 Bad Request`
 * **Corpo da Requisição (JSON - Exemplo):**
-
-  {
-    "nome": "Fábio Oliveira"
-  }
-
+```bash
+      "nome": "Fábio Oliveira"
+  ```
 
 ### 3. Listagem Geral de Usuários
 
@@ -102,5 +98,51 @@ Corpo da Requisição (JSON - Exemplo)
 * **Rota:** `/usuarios/:id` (Exemplo testado: `/usuarios/999`)
 * **Método:** `GET`
 * **Descrição:** Tenta buscar um usuário por um identificador numérico único. Retorna uma mensagem amigável de erro caso o ID informado não conste na memória.
+
+
+### 5. Atualização de Usuário (Sucesso)
+* **Rota:** /api/users/:id
+  
+* **Método:** PUT
+  
+* **Descrição:** Atualiza os dados de um usuário existente. Exige a validação rigorosa dos campos name e email.
+
+* **Status Code Esperado:** 200 OK
+
+* **Corpo da Requisição (JSON - Exemplo):**
+  ```bash
+  "name": "Fábio Duarte Oliveira",
+  "email": "fabio.duarte@email.com"
+  ```
+
+### 6. Atualização de Usuário (Falha - ID Inexistente)
+* **Rota:** /api/users/:id (Exemplo: /api/users/999)
+
+* **Método:** PUT
+
+* **Descrição:** Retorna erro caso o ID fornecido para atualização não conste na base.
+
+* **Status Code Esperado:** 404 Not Found
+
+### 7. Exclusão de Usuário (Sucesso)
+* **Rota:** /api/users/:id
+
+* **Método:** DELETE
+
+* **Descrição:** Remove um usuário do sistema de forma segura, garantindo a integridade dos IDs restantes.
+
+* **Status Code Esperado:** 204 No Content (ou 200 OK dependendo da implementação).
+
+* **Corpo da Requisição:** Nenhum (Vazio).
+
+### 8. Exclusão de Usuário (Falha - ID Inexistente)
+* **Rota:** /api/users/:id (Exemplo: /api/users/999)
+
+* **Método:** DELETE
+
+* **Descrição:** Retorna erro caso tente deletar um usuário que não existe.
+
+* **Status Code Esperado:** 404 Not Found
+
 * **Status Code Esperado:** `404 Not Found`
 * **Corpo da Requisição:** Nenhum (Vazio).
